@@ -27,14 +27,7 @@ app.use(cookieParser());
 // secure apps. should be placed before any authentication middleware
 app.use(helmet());
 // enable cors
-app.use(
-  cors()
-  //   {
-  //   origin: "http://localhost:5173",
-  //   methods: "GET,POST,PUT,DELETE",
-  //   credentials: true,
-  // }
-);
+app.use(cors());
 
 const sessionSecret = process.env.SECRET || "defaultSecret";
 
@@ -58,11 +51,6 @@ passport.serializeUser((user, done) => {
   done(null, user);
 });
 
-// Google Authentication routes
-// app.get(
-//   "/auth/google",
-//   passport.authenticate("google", { scope: ["email", "profile"] })
-// );
 app.get(
   "/auth/google",
   passport.authenticate("google", {
@@ -105,7 +93,6 @@ app.get("/auth/failure", async (req: Request, res: Response) => {
 
 app.get("/logout", (req: Request, res: Response) => {
   req.session.destroy(() => {
-    // console.log("User Logged out");
     res.redirect("/login");
   });
 });
