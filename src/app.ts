@@ -8,7 +8,6 @@ import session from "express-session";
 import logger from "morgan";
 import passport from "passport";
 import cron from "node-cron";
-
 import { configureGoogleStrategy } from "./components/OAuth";
 import router from "./routes";
 import { UsersModel } from "./components/users/model";
